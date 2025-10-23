@@ -1,20 +1,20 @@
-const express = require("express");
-const app = express();
-const port = 5000;
-const cors = require("cors");
-require ('dotenv').config();
-const cookieParser = require("cookie-parser");
-const {connectDB} = require("./connection");
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import Store from '../src/redux/Store'
+import App from './App';
 
-connectDB();
+import './index.css';
 
-app.use(cors());
-app.use(express.json());
-app.use(cookieParser());
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-app.get("/",(req, res)=>{
-    res.send("hello krishabh")
-})
+root.render(
+  <React.StrictMode>
+    <Provider store={Store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
 
-app.listen(port, ()=>console.log(`Server is running on port ${port}`));
 
